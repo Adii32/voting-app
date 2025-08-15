@@ -1,0 +1,37 @@
+<div class="container mt-4">
+<h2 class="text-center">create poll</h2>
+<div class="mb-3">
+
+  <input type="text" 
+ [(ngModel)]="newPoll.question"
+  placeholder="poll question"
+  class="form control w-100 border rounded border-primary  p-2"
+  required
+  
+  />
+</div>
+<div class="options-container mb-3">
+  <div *ngFor="let option  of newPoll.options; let i = index; trackBy : trackByIndex " class="input-group mb-2">
+<input  [(ngModel)]="option.options"
+  placeholder="option"
+  class="form control w-75 border rounded border-primary p-2 "
+  required
+ />
+ <button (click)="newPoll.options.splice(i,1)" *ngIf="newPoll.options.length > 0" class="btn btn-danger ms-2"> Remove</button>
+  </div>
+</div>
+<button class="btn btn-outline-danger " (click)="addPoll()">Add Another poll</button>
+<button class="btn btn-primary ms-2" (click)="createPoll()"> create poll</button>
+<div class="polls-list">
+
+  <div *ngFor="let poll of polls" class="border rouded p-3 mb-3">
+    <h3 class="">{{poll.question}}</h3>
+    <div *ngFor="let option of poll.options; let i =index" class="options-list">
+      <button (click)="vote(poll.id, i)" class="btn btn-outline-primary me-2 mt-2">
+        {{option.options}} ({{option.voteCount}})
+      </button>
+
+    </div>
+</div>
+ </div>
+ </div>
